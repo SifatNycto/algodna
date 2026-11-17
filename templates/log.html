@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}Log practice{% endblock %}
+{% block main %}
+<div class="page-heading"><div class="eyebrow">CAPTURE THE PROCESS, NOT JUST THE RESULT</div><h1>Log a <span class="gradient-text">practice session.</span></h1><p class="muted">Honest records make your insights more useful. An unsuccessful attempt is still valuable data.</p></div>
+<form method="post" class="panel form-panel">
+    <div class="row g-3">
+        <div class="col-md-8"><label class="form-label">Problem name *</label><input class="form-control" name="problem_name" placeholder="e.g. Two Sum" required></div>
+        <div class="col-md-4"><label class="form-label">Platform *</label><input class="form-control" name="platform" placeholder="Codeforces, LeetCode..." required></div>
+        <div class="col-md-6"><label class="form-label">Algorithm topic *</label><select class="form-select" name="topic" required><option value="">Choose a topic</option>{% for topic in topics %}<option>{{ topic }}</option>{% endfor %}</select></div>
+        <div class="col-md-3"><label class="form-label">Difficulty *</label><select class="form-select" name="difficulty" required><option value="">Choose</option>{% for level in ['Beginner','Easy','Medium','Hard'] %}<option>{{ level }}</option>{% endfor %}</select></div>
+        <div class="col-md-3"><label class="form-label">Outcome *</label><select class="form-select" name="result" required><option value="Solved">Solved</option><option value="Attempted">Attempted / not solved</option></select></div>
+        <div class="col-md-4"><label class="form-label">Total attempts *</label><input class="form-control" type="number" name="attempts_count" min="1" value="1" required></div>
+        <div class="col-md-4"><label class="form-label">Wrong attempts *</label><input class="form-control" type="number" name="wrong_attempts" min="0" value="0" required></div>
+        <div class="col-md-4"><label class="form-label">Practice date *</label><input class="form-control" type="date" name="solved_at" value="{{ today }}" required></div>
+        <div class="col-12"><label class="form-label">What did you learn? (optional)</label><textarea class="form-control" name="notes" rows="3" placeholder="What approach worked? Where did you get stuck? What would you do differently?"></textarea></div>
+    </div>
+    <div class="d-flex justify-content-end gap-2 mt-4"><a class="btn btn-quiet" href="{{ url_for('index') }}">Cancel</a><button class="btn btn-primary">Save practice record</button></div>
+</form>
+{% endblock %}

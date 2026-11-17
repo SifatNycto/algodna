@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}Log in{% endblock %}
+{% block main %}
+<div class="auth-wrap">
+    <div class="eyebrow">YOUR PERSONAL PROBLEM-SOLVING PROFILE</div>
+    <h1>Welcome <span class="gradient-text">back.</span></h1>
+    <p class="muted">Continue building a clearer picture of how you solve problems.</p>
+    <form method="post" class="panel auth-panel">
+        <label class="form-label">Username</label>
+        <input class="form-control mb-3" name="username" autocomplete="username" required autofocus>
+        <label class="form-label">Password</label>
+        <input class="form-control mb-4" type="password" name="password" autocomplete="current-password" required>
+        <button class="btn btn-primary w-100">Log in to ALGO DNA</button>
+    </form>
+    <p class="muted text-center mt-3">New here? <a href="{{ url_for('register') }}">Create your profile</a></p>
+</div>
+{% endblock %}

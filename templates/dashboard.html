@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block main %}
+<section class="hero">
+    <div>
+        <div class="eyebrow">YOUR ALGORITHM LEARNING PROFILE</div>
+        <h1>Decode your <span class="gradient-text">thinking.</span></h1>
+        <p class="muted hero-copy">ALGO DNA looks beyond the number of problems you solve. Track patterns, notice friction, and decide what to practise next.</p>
+        <a class="btn btn-primary" href="{{ url_for('log_attempt') }}">+ Log a practice session</a>
+        <a class="btn btn-quiet ms-2" href="{{ url_for('roadmap') }}">View my roadmap →</a>
+    </div>
+    <div class="dna-art" aria-label="Abstract DNA-inspired graphic"><div class="helix"></div><div class="orb orb-one"></div><div class="orb orb-two"></div><span>LEARN<br>· ANALYZE<br>· IMPROVE</span></div>
+</section>
+<div class="row g-3 metric-grid">
+    <div class="col-6 col-lg-3"><div class="panel metric"><span>Problems logged</span><strong>{{ analytics.total }}</strong><small>All practice records</small></div></div>
+    <div class="col-6 col-lg-3"><div class="panel metric"><span>Successfully solved</span><strong>{{ analytics.solved }}</strong><small>Completed problems</small></div></div>
+    <div class="col-6 col-lg-3"><div class="panel metric"><span>Success rate</span><strong>{{ analytics.success_rate }}<i>%</i></strong><small>Solved / total records</small></div></div>
+    <div class="col-6 col-lg-3"><div class="panel metric"><span>Current streak</span><strong>{{ analytics.active_days }}<i>d</i></strong><small>Consecutive active days</small></div></div>
+</div>
+<div class="row g-4 mt-1">
+    <div class="col-lg-7">
+        <div class="section-heading"><div><div class="eyebrow">WHERE TO FOCUS</div><h2>Priority topics</h2></div><a href="{{ url_for('insights') }}">All insights →</a></div>
+        <div class="panel p-4">
+        {% if priority_topics %}
+            {% for topic in priority_topics %}
+            <div class="topic-row">
+                <div class="d-flex justify-content-between"><strong>{{ topic.name }}</strong><span class="muted">{{ topic.rate }}% solved · {{ topic.total }} logged</span></div>
+                <div class="progress mt-2"><div class="progress-bar" style="width: {{ topic.rate }}%"></div></div>
+                <small class="muted">Attention score: {{ topic.struggle }}/100</small>
+            </div>
+            {% endfor %}
+            <p class="tiny-note mt-3 mb-0">Priority is an estimate based on your recorded solve rate, practice volume, and wrong attempts—not a judgement of ability.</p>
+        {% else %}
+            <div class="empty-state"><div class="empty-icon">⌁</div><h3>Your profile starts here</h3><p>Log your first problem to begin discovering your topic patterns.</p><a href="{{ url_for('log_attempt') }}" class="btn btn-primary">Add first record</a></div>
+        {% endif %}
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="section-heading"><div><div class="eyebrow">RECENT ACTIVITY</div><h2>Latest records</h2></div></div>
+        <div class="panel p-3">
+        {% if recent %}
+            {% for item in recent %}
+            <div class="activity-item">
+                <div class="activity-dot {% if item.result == 'Solved' %}dot-green{% else %}dot-orange{% endif %}"></div>
+                <div class="flex-grow-1"><strong>{{ item.problem_name }}</strong><div class="muted small">{{ item.topic }} · {{ item.platform }} · {{ item.solved_at }}</div></div>
+                <span class="status-pill {% if item.result == 'Solved' %}status-solved{% else %}status-attempted{% endif %}">{{ item.result }}</span>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="muted p-3 mb-0">No activity yet. Your records will appear here.</p>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}Create profile{% endblock %}
+{% block main %}
+<div class="auth-wrap">
+    <div class="eyebrow">START WITH YOUR OWN DATA</div>
+    <h1>Build your <span class="gradient-text">ALGO DNA.</span></h1>
+    <p class="muted">Create an account to track your practice and discover your patterns.</p>
+    <form method="post" class="panel auth-panel">
+        <label class="form-label">Username</label>
+        <input class="form-control mb-3" name="username" minlength="3" autocomplete="username" required autofocus>
+        <label class="form-label">Password</label>
+        <input class="form-control mb-3" type="password" name="password" minlength="6" autocomplete="new-password" required>
+        <label class="form-label">Confirm password</label>
+        <input class="form-control mb-4" type="password" name="confirmation" minlength="6" autocomplete="new-password" required>
+        <button class="btn btn-primary w-100">Create my profile</button>
+    </form>
+    <p class="muted text-center mt-3">Already registered? <a href="{{ url_for('login') }}">Log in</a></p>
+</div>
+{% endblock %}

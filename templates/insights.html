@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}Insights{% endblock %}
+{% block main %}
+<div class="page-heading"><div class="eyebrow">YOUR PATTERNS, MADE VISIBLE</div><h1>Practice <span class="gradient-text">insights.</span></h1><p class="muted">A snapshot of the records you have entered so far.</p></div>
+<div class="row g-3 mb-4">
+    <div class="col-6 col-lg-3"><div class="panel metric"><span>Total records</span><strong>{{ analytics.total }}</strong></div></div>
+    <div class="col-6 col-lg-3"><div class="panel metric"><span>Solved</span><strong>{{ analytics.solved }}</strong></div></div>
+    <div class="col-6 col-lg-3"><div class="panel metric"><span>Not solved</span><strong>{{ analytics.attempted }}</strong></div></div>
+    <div class="col-6 col-lg-3"><div class="panel metric"><span>Wrong attempts</span><strong>{{ analytics.wrong }}</strong></div></div>
+</div>
+<div class="row g-4">
+    <div class="col-lg-7"><div class="section-heading"><div><div class="eyebrow">TOPIC BREAKDOWN</div><h2>Where you practise</h2></div></div><div class="panel p-4">
+    {% if analytics.topics %}{% for topic in analytics.topics %}
+        <div class="topic-row"><div class="d-flex justify-content-between"><strong>{{ topic.name }}</strong><span class="muted">{{ topic.solved }}/{{ topic.total }} solved ({{ topic.rate }}%)</span></div><div class="progress mt-2"><div class="progress-bar" style="width: {{ topic.rate }}%"></div></div><small class="muted">{{ topic.wrong }} wrong attempts · attention score {{ topic.struggle }}/100</small></div>
+    {% endfor %}{% else %}<p class="muted mb-0">No records yet. Add practice sessions to populate this page.</p>{% endif %}
+    </div></div>
+    <div class="col-lg-5"><div class="section-heading"><div><div class="eyebrow">DIFFICULTY PROFILE</div><h2>By level</h2></div></div><div class="panel p-4">
+    {% for level in analytics.difficulty %}
+        <div class="topic-row"><div class="d-flex justify-content-between"><strong>{{ level.name }}</strong><span class="muted">{{ level.total }} records · {{ level.rate }}% solved</span></div><div class="progress mt-2"><div class="progress-bar bar-alt" style="width: {{ level.rate }}%"></div></div></div>
+    {% endfor %}
+    </div></div>
+</div>
+<div class="callout mt-4"><strong>Interpretation matters.</strong> These metrics describe only the practice records you enter. They are indicators to help you reflect, not a formal measurement of intelligence or programming ability.</div>
+{% endblock %}

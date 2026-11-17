@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}My roadmap{% endblock %}
+{% block main %}
+<div class="page-heading"><div class="eyebrow">A NEXT STEP BASED ON YOUR OWN PRACTICE</div><h1>Your practice <span class="gradient-text">roadmap.</span></h1><p class="muted">{{ intro }}</p></div>
+{% if plan %}
+<div class="roadmap-list">
+    {% for item in plan %}
+    <div class="panel roadmap-card"><div class="roadmap-number">{{ loop.index }}</div><div class="flex-grow-1"><div class="eyebrow">PRIORITY {{ loop.index }} · {{ item.rate }}% SOLVE RATE</div><h2>{{ item.topic }}</h2><p class="mb-0">{{ item.action }}</p></div><span class="roadmap-arrow">↗</span></div>
+    {% endfor %}
+</div>
+<div class="callout mt-4">Try one priority at a time. After completing more practice, return to your dashboard—the roadmap will update from your new records.</div>
+{% else %}
+<div class="panel empty-state"><div class="empty-icon">⌁</div><h3>Your roadmap is waiting for data</h3><p>Log at least one practice session. A few records across different topics will make the recommendations more meaningful.</p><a class="btn btn-primary" href="{{ url_for('log_attempt') }}">Log a practice session</a></div>
+{% endif %}
+{% endblock %}
