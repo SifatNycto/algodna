@@ -222,7 +222,7 @@ def logout():
 def log_attempt():
     topics = [
         "Arrays", "Strings", "Implementation", "Sorting", "Searching", "Two Pointers",
-        "Binary Search", "Recursion", "Backtracking", "Greedy",
+        "Binary Search", "Recursion", "Backtracking", "Greedy", "Brute Force", 
         "Dynamic Programming", "Graphs", "Trees", "Number Theory",
         "Bit Manipulation", "Data Structures", "Other"
     ]
