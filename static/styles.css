@@ -1,73 +1,556 @@
- :root {
-    --bg: #0a0e17; --panel: #111927; --panel-2: #151f30; --line: #253248;
-    --text: #eef4ff; --muted: #8e9bb1; --cyan: #69e3dc; --violet: #9c8cff;
+/* ==========================================================================
+   1. Root Variables & Resets
+   ========================================================================== */
+:root {
+    --bg: #0a0e17;
+    --panel: #111927;
+    --panel-2: #151f30;
+    --line: #253248;
+    --text: #eef4ff;
+    --muted: #8e9bb1;
+    --cyan: #69e3dc;
+    --violet: #9c8cff;
 }
-* { box-sizing: border-box; }
-body { background: radial-gradient(circle at 75% 0%, #18233a 0, var(--bg) 38%); color: var(--text); font-family: 'Manrope', sans-serif; min-height: 100vh; }
-a { color: var(--cyan); text-decoration: none; } a:hover { color: #a4fff7; }
-.app-nav { background: rgba(8, 13, 23, .92); border-bottom: 1px solid var(--line); padding: 15px 0; }
-.navbar-brand { font-weight: 800; letter-spacing: .08em; color: var(--text); }
-.brand-mark { display: inline-grid; place-items: center; width: 29px; height: 29px; border-radius: 9px; background: linear-gradient(135deg, var(--cyan), var(--violet)); color: #08111d; margin-right: 7px; }
-.brand-accent { color: var(--cyan); }
-.nav-link { color: #b4bfd0 !important; font-size: .9rem; margin: 0 5px; }
-.nav-link:hover { color: white !important; }
-.nav-user { color: var(--cyan); font: .78rem 'DM Mono', monospace; padding: 0 12px; }
-.page-wrap { min-height: calc(100vh - 140px); padding-top: 48px; padding-bottom: 70px; }
-.hero { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 32px 0 50px; }
-.eyebrow { color: var(--cyan); font: 500 .69rem 'DM Mono', monospace; letter-spacing: .14em; margin-bottom: 12px; }
-h1 { font-size: clamp(2.2rem, 5vw, 4.1rem); line-height: 1.08; font-weight: 800; letter-spacing: -.055em; }
-h2 { font-size: 1.35rem; font-weight: 800; letter-spacing: -.03em; margin: 0; }
-h3 { font-size: 1.15rem; font-weight: 800; }
-.gradient-text { background: linear-gradient(90deg, var(--cyan), #a99aff); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.muted { color: var(--muted); } .hero-copy { max-width: 610px; line-height: 1.8; margin: 18px 0 24px; }
-.btn-primary { background: linear-gradient(100deg, #48cfc8, #8e80ff); border: 0; color: #07111b; font-weight: 800; padding: 11px 18px; }
-.btn-primary:hover { color: #07111b; filter: brightness(1.12); }
-.btn-quiet { color: #d1daea; border: 1px solid var(--line); padding: 10px 16px; }
-.btn-quiet:hover { background: var(--panel-2); color: white; }
-.panel { background: linear-gradient(145deg, rgba(20,31,48,.96), rgba(14,22,35,.96)); border: 1px solid var(--line); border-radius: 17px; box-shadow: 0 12px 36px rgba(0,0,0,.12); }
-.metric { padding: 20px; min-height: 132px; }
-.metric span { color: var(--muted); font-size: .77rem; display: block; }
-.metric strong { display: block; font-size: 2.15rem; line-height: 1.35; letter-spacing: -.06em; }
-.metric strong i { color: var(--cyan); font: 500 1rem 'DM Mono', monospace; margin-left: 3px; }
-.metric small { color: #718098; font-size: .7rem; }
-.section-heading { display: flex; align-items: end; justify-content: space-between; margin: 25px 0 14px; }
-.section-heading .eyebrow { margin-bottom: 5px; }
-.topic-row { padding: 13px 0; border-bottom: 1px solid rgba(55,72,98,.5); }
-.topic-row:last-child { border-bottom: 0; }
-.topic-row strong { font-size: .9rem; } .topic-row small { color: var(--muted); display: inline-block; margin-top: 7px; font-size: .7rem; }
-.progress { height: 7px; background: #263247; border-radius: 9px; }
-.progress-bar { background: linear-gradient(90deg, var(--cyan), #7c9bff); border-radius: 9px; }
-.bar-alt { background: linear-gradient(90deg, #a28aff, #e18bc8); }
-.activity-item { display: flex; gap: 12px; align-items: center; padding: 13px 8px; border-bottom: 1px solid rgba(55,72,98,.5); }
-.activity-item:last-child { border: 0; } .activity-item strong { font-size: .83rem; }
-.activity-dot { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 8px; }
-.dot-green { background: var(--cyan); box-shadow: 0 0 12px #69e3dc66; } .dot-orange { background: #ffb36b; }
-.status-pill { border-radius: 30px; padding: 4px 8px; font-size: .65rem; white-space: nowrap; }
-.status-solved { color: var(--cyan); background: #173c3c; } .status-attempted { color: #ffc27d; background: #45321f; }
-.dna-art { width: 245px; height: 220px; position: relative; display: grid; place-items: center; flex: 0 0 245px; border: 1px solid #34445d; border-radius: 28px; background: linear-gradient(145deg, #17263a, #111626); overflow: hidden; }
-.dna-art span { position: absolute; bottom: 20px; right: 20px; color: #b4c4d7; font: .62rem/1.8 'DM Mono', monospace; letter-spacing: .1em; }
-.helix { width: 90px; height: 145px; border-left: 5px solid var(--cyan); border-right: 5px solid var(--violet); border-radius: 50%; transform: rotate(28deg); position: relative; filter: drop-shadow(0 0 9px #69e3dc88); }
-.helix:before { content: ''; position: absolute; inset: 12px -2px; background: repeating-linear-gradient(to bottom, transparent 0 12px, #a3b4ff 13px 16px, transparent 17px 26px); }
-.orb { position: absolute; border-radius: 50%; filter: blur(1px); opacity: .6; }
-.orb-one { width: 90px; height: 90px; background: #54d9d522; top: -35px; left: -25px; }
-.orb-two { width: 120px; height: 120px; background: #9c8cff22; bottom: -55px; right: -30px; }
-.page-heading { margin: 15px 0 30px; max-width: 760px; } .page-heading p { line-height: 1.8; }
-.form-panel { padding: 28px; max-width: 900px; }
-.form-control, .form-select { background: #0c1421; border: 1px solid #34445d; color: var(--text); padding: 11px 13px; }
-.form-control:focus, .form-select:focus { background: #0c1421; color: white; border-color: var(--cyan); box-shadow: 0 0 0 .2rem #69e3dc20; }
-.form-control::placeholder { color: #64748b; } .form-label { color: #c6d2e3; font-size: .8rem; font-weight: 700; }
-.auth-wrap { max-width: 450px; margin: 30px auto; } .auth-wrap h1 { font-size: 2.8rem; } .auth-panel { padding: 25px; margin-top: 25px; }
-.auth-wrap > p { font-size: .85rem; }
-.empty-state { text-align: center; padding: 38px 20px; } .empty-state p { color: var(--muted); max-width: 440px; margin: 10px auto 20px; }
-.empty-icon { font-size: 2.8rem; color: var(--cyan); margin-bottom: 10px; }
-.tiny-note { color: #728198; font-size: .69rem; line-height: 1.6; }
-.callout { background: #142536; border: 1px solid #2c5260; border-radius: 13px; padding: 17px 20px; color: #aebed0; font-size: .85rem; line-height: 1.7; }
-.callout strong { color: var(--cyan); }
-.roadmap-list { display: grid; gap: 14px; max-width: 900px; }
-.roadmap-card { display: flex; align-items: center; gap: 18px; padding: 22px; }
-.roadmap-number { display: grid; place-items: center; width: 42px; height: 42px; flex: 0 0 42px; border-radius: 13px; background: #1d3c48; color: var(--cyan); font: 1rem 'DM Mono', monospace; }
-.roadmap-card h2 { margin-bottom: 7px; } .roadmap-card p { color: #a8b5c7; line-height: 1.7; font-size: .88rem; }
-.roadmap-arrow { color: var(--cyan); font-size: 1.4rem; }
-.footer { border-top: 1px solid var(--line); padding: 20px 0 28px; display: flex; justify-content: space-between; color: #66758d; font: .67rem 'DM Mono', monospace; letter-spacing: .04em; }
-.alert { border-radius: 12px; }
-@media (max-width: 700px) { .hero { padding-top: 12px; } .dna-art { display: none; } .page-wrap { padding-top: 30px; } .footer { display: block; line-height: 2; } .roadmap-card { align-items: flex-start; padding: 17px; } }
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle at 75% 0%, #18233a 0, var(--bg) 38%);
+    color: var(--text);
+    font-family: 'Manrope', sans-serif;
+    min-height: 100vh;
+}
+
+a {
+    color: var(--cyan);
+    text-decoration: none;
+}
+
+a:hover {
+    color: #a4fff7;
+}
+
+
+/* ==========================================================================
+   2. Navigation & Layout Elements
+   ========================================================================== */
+.app-nav {
+    background: rgba(8, 13, 23, .92);
+    border-bottom: 1px solid var(--line);
+    padding: 15px 0;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    letter-spacing: .08em;
+    color: var(--text);
+}
+
+.brand-mark {
+    display: inline-grid;
+    place-items: center;
+    width: 29px;
+    height: 29px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, var(--cyan), var(--violet));
+    color: #08111d;
+    margin-right: 7px;
+}
+
+.brand-accent {
+    color: var(--cyan);
+}
+
+.nav-link {
+    color: #b4bfd0 !important;
+    font-size: .9rem;
+    margin: 0 5px;
+}
+
+.nav-link:hover {
+    color: white !important;
+}
+
+.nav-user {
+    color: var(--cyan);
+    font: .78rem 'DM Mono', monospace;
+    padding: 0 12px;
+}
+
+.page-wrap {
+    min-height: calc(100vh - 140px);
+    padding-top: 48px;
+    padding-bottom: 70px;
+}
+
+
+/* ==========================================================================
+   3. Typography, Headings, & Utilities
+   ========================================================================== */
+h1 {
+    font-size: clamp(2.2rem, 5vw, 4.1rem);
+    line-height: 1.08;
+    font-weight: 800;
+    letter-spacing: -.055em;
+}
+
+h2 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -.03em;
+    margin: 0;
+}
+
+h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, var(--cyan), #a99aff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.eyebrow {
+    color: var(--cyan);
+    font: 500 .69rem 'DM Mono', monospace;
+    letter-spacing: .14em;
+    margin-bottom: 12px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    margin: 25px 0 14px;
+}
+
+.section-heading .eyebrow {
+    margin-bottom: 5px;
+}
+
+.tiny-note {
+    color: #728198;
+    font-size: .69rem;
+    line-height: 1.6;
+}
+
+
+/* ==========================================================================
+   4. Buttons & Panels
+   ========================================================================== */
+.btn-primary {
+    background: linear-gradient(100deg, #48cfc8, #8e80ff);
+    border: 0;
+    color: #07111b;
+    font-weight: 800;
+    padding: 11px 18px;
+}
+
+.btn-primary:hover {
+    color: #07111b;
+    filter: brightness(1.12);
+}
+
+.btn-quiet {
+    color: #d1daea;
+    border: 1px solid var(--line);
+    padding: 10px 16px;
+}
+
+.btn-quiet:hover {
+    background: var(--panel-2);
+    color: white;
+}
+
+.panel {
+    background: linear-gradient(145deg, rgba(20,31,48,.96), rgba(14,22,35,.96));
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    box-shadow: 0 12px 36px rgba(0,0,0,.12);
+}
+
+
+/* ==========================================================================
+   5. Hero Section & DNA Art Component
+   ========================================================================== */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 32px 0 50px;
+}
+
+.hero-copy {
+    max-width: 610px;
+    line-height: 1.8;
+    margin: 18px 0 24px;
+}
+
+.dna-art {
+    width: 245px;
+    height: 220px;
+    position: relative;
+    display: grid;
+    place-items: center;
+    flex: 0 0 245px;
+    border: 1px solid #34445d;
+    border-radius: 28px;
+    background: linear-gradient(145deg, #17263a, #111626);
+    overflow: hidden;
+}
+
+.dna-art span {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: #b4c4d7;
+    font: .62rem/1.8 'DM Mono', monospace;
+    letter-spacing: .1em;
+}
+
+.helix {
+    width: 90px;
+    height: 145px;
+    border-left: 5px solid var(--cyan);
+    border-right: 5px solid var(--violet);
+    border-radius: 50%;
+    transform: rotate(28deg);
+    position: relative;
+    filter: drop-shadow(0 0 9px #69e3dc88);
+}
+
+.helix:before {
+    content: '';
+    position: absolute;
+    inset: 12px -2px;
+    background: repeating-linear-gradient(to bottom, transparent 0 12px, #a3b4ff 13px 16px, transparent 17px 26px);
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(1px);
+    opacity: .6;
+}
+
+.orb-one {
+    width: 90px;
+    height: 90px;
+    background: #54d9d522;
+    top: -35px;
+    left: -25px;
+}
+
+.orb-two {
+    width: 120px;
+    height: 120px;
+    background: #9c8cff22;
+    bottom: -55px;
+    right: -30px;
+}
+
+
+/* ==========================================================================
+   6. Metrics, Topics, & Activity Items
+   ========================================================================== */
+.metric {
+    padding: 20px;
+    min-height: 132px;
+}
+
+.metric span {
+    color: var(--muted);
+    font-size: .77rem;
+    display: block;
+}
+
+.metric strong {
+    display: block;
+    font-size: 2.15rem;
+    line-height: 1.35;
+    letter-spacing: -.06em;
+}
+
+.metric strong i {
+    color: var(--cyan);
+    font: 500 1rem 'DM Mono', monospace;
+    margin-left: 3px;
+}
+
+.metric small {
+    color: #718098;
+    font-size: .7rem;
+}
+
+.topic-row {
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(55,72,98,.5);
+}
+
+.topic-row:last-child {
+    border-bottom: 0;
+}
+
+.topic-row strong {
+    font-size: .9rem;
+}
+
+.topic-row small {
+    color: var(--muted);
+    display: inline-block;
+    margin-top: 7px;
+    font-size: .7rem;
+}
+
+.progress {
+    height: 7px;
+    background: #263247;
+    border-radius: 9px;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--cyan), #7c9bff);
+    border-radius: 9px;
+}
+
+.bar-alt {
+    background: linear-gradient(90deg, #a28aff, #e18bc8);
+}
+
+.activity-item {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 13px 8px;
+    border-bottom: 1px solid rgba(55,72,98,.5);
+}
+
+.activity-item:last-child {
+    border: 0;
+}
+
+.activity-item strong {
+    font-size: .83rem;
+}
+
+.activity-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex: 0 0 8px;
+}
+
+.dot-green {
+    background: var(--cyan);
+    box-shadow: 0 0 12px #69e3dc66;
+}
+
+.dot-orange {
+    background: #ffb36b;
+}
+
+.status-pill {
+    border-radius: 30px;
+    padding: 4px 8px;
+    font-size: .65rem;
+    white-space: nowrap;
+}
+
+.status-solved {
+    color: var(--cyan);
+    background: #173c3c;
+}
+
+.status-attempted {
+    color: #ffc27d;
+    background: #45321f;
+}
+
+
+/* ==========================================================================
+   7. Forms, Authentication, & Callouts
+   ========================================================================== */
+.page-heading {
+    margin: 15px 0 30px;
+    max-width: 760px;
+}
+
+.page-heading p {
+    line-height: 1.8;
+}
+
+.form-panel {
+    padding: 28px;
+    max-width: 900px;
+}
+
+.form-control,
+.form-select {
+    background: #0c1421;
+    border: 1px solid #34445d;
+    color: var(--text);
+    padding: 11px 13px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background: #0c1421;
+    color: white;
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 .2rem #69e3dc20;
+}
+
+.form-control::placeholder {
+    color: #64748b;
+}
+
+.form-label {
+    color: #c6d2e3;
+    font-size: .8rem;
+    font-weight: 700;
+}
+
+.auth-wrap {
+    max-width: 450px;
+    margin: 30px auto;
+}
+
+.auth-wrap h1 {
+    font-size: 2.8rem;
+}
+
+.auth-panel {
+    padding: 25px;
+    margin-top: 25px;
+}
+
+.auth-wrap > p {
+    font-size: .85rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 38px 20px;
+}
+
+.empty-state p {
+    color: var(--muted);
+    max-width: 440px;
+    margin: 10px auto 20px;
+}
+
+.empty-icon {
+    font-size: 2.8rem;
+    color: var(--cyan);
+    margin-bottom: 10px;
+}
+
+.callout {
+    background: #142536;
+    border: 1px solid #2c5260;
+    border-radius: 13px;
+    padding: 17px 20px;
+    color: #aebed0;
+    font-size: .85rem;
+    line-height: 1.7;
+}
+
+.callout strong {
+    color: var(--cyan);
+}
+
+.alert {
+    border-radius: 12px;
+}
+
+
+/* ==========================================================================
+   8. Roadmap & Footer
+   ========================================================================== */
+.roadmap-list {
+    display: grid;
+    gap: 14px;
+    max-width: 900px;
+}
+
+.roadmap-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 22px;
+}
+
+.roadmap-number {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    border-radius: 13px;
+    background: #1d3c48;
+    color: var(--cyan);
+    font: 1rem 'DM Mono', monospace;
+}
+
+.roadmap-card h2 {
+    margin-bottom: 7px;
+}
+
+.roadmap-card p {
+    color: #a8b5c7;
+    line-height: 1.7;
+    font-size: .88rem;
+}
+
+.roadmap-arrow {
+    color: var(--cyan);
+    font-size: 1.4rem;
+}
+
+.footer {
+    border-top: 1px solid var(--line);
+    padding: 20px 0 28px;
+    display: flex;
+    justify-content: space-between;
+    color: #66758d;
+    font: .67rem 'DM Mono', monospace;
+    letter-spacing: .04em;
+}
+
+
+/* ==========================================================================
+   9. Responsive Media Queries
+   ========================================================================== */
+@media (max-width: 700px) {
+    .hero {
+        padding-top: 12px;
+    }
+    
+    .dna-art {
+        display: none;
+    }
+    
+    .page-wrap {
+        padding-top: 30px;
+    }
+    
+    .footer {
+        display: block;
+        line-height: 2;
+    }
+    
+    .roadmap-card {
+        align-items: flex-start;
+        padding: 17px;
+    }
+}
