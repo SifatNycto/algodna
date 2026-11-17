@@ -233,7 +233,10 @@ def log_attempt():
         difficulty = request.form.get("difficulty", "")
         result = request.form.get("result", "")
         notes = request.form.get("notes", "").strip()
-        solved_at = request.form.get("solved_at", date.today().isoformat())
+        solved_at = datetime.strptime(
+            request.form.get("solved_at", "").strip(),
+            "%d-%m-%Y"
+        ).date().isoformat()
 
         try:
             attempts_count = int(request.form.get("attempts_count", ""))

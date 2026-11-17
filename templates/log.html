@@ -11,7 +11,7 @@
         <div class="col-md-3"><label class="form-label">Outcome *</label><select class="form-select" name="result" required><option value="Solved">Solved</option><option value="Attempted">Attempted / not solved</option></select></div>
         <div class="col-md-4"><label class="form-label">Total attempts *</label><input class="form-control" type="number" name="attempts_count" min="1" value="1" required></div>
         <div class="col-md-4"><label class="form-label">Wrong attempts *</label><input class="form-control" type="number" name="wrong_attempts" min="0" value="0" required></div>
-        <div class="col-md-4"><label class="form-label">Practice date *</label><input class="form-control" type="date" name="solved_at" value="{{ today }}" required></div>
+        <div class="col-md-4"><label class="form-label">Practice date *</label><input class="form-control" type="text" name="solved_at" placeholder="DD-MM-YYYY" pattern="\d{2}-\d{2}-\d{4}" title="Enter date as DD-MM-YYYY" required></div>
         <div class="col-12"><label class="form-label">What did you learn? (optional)</label><textarea class="form-control" name="notes" rows="3" placeholder="What approach worked? Where did you get stuck? What would you do differently?"></textarea></div>
     </div>
     <div class="d-flex justify-content-end gap-2 mt-4"><a class="btn btn-quiet" href="{{ url_for('index') }}">Cancel</a><button class="btn btn-primary">Save practice record</button></div>
